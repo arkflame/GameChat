@@ -1,0 +1,46 @@
+# Settings for the reformatter module.
+reformatter:
+  # Do you want to enable this module?
+  enabled: true
+
+  # Removes caps automatically from the messages.
+  caps: true
+
+  # Removes flood automatically from the messages.
+  flood: true
+
+  # Adds a dot at the end of the messages.
+  dot: true
+
+# Settings for the global chat module.
+global:
+  # Do you want to enable this module?
+  enabled: true
+
+  # Do you want to make the chat world based?
+  # Not working yet, coming soon...
+  world: false
+
+  # Icon to show when a player has a custom displayname.
+  displayname_icon: "~"
+
+  # How should the chat messages look?
+  # Supports PlaceholderAPI
+  # Set to "" to disable messages.
+  format:
+    message: "&c⚔%statistic_player_kills% %vault_prefix%%player_displayname%%vault_suffix%&8: &r%message%"
+
+# Settings for the private chat module.
+private:
+  # Do you want to enable this module?
+  enabled: true
+
+  # Plays a sound when a player receives a private message.
+  sound: true
+
+  # How should the private messages look?
+  # Supports PlaceholderAPI
+  format:
+    sender: "&7%vault_prefix_color%%player_name%"
+    receiver: "&7%vault_prefix_color%%player_name%"
+    message: "%sender% &7➟ %receiver%&8: &r%message%"

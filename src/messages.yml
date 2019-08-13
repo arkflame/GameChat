@@ -1,0 +1,68 @@
+# You can create as many locales as you want,
+# The language will change depending on the player locale.
+# If the locale of the player doesnt exist in this file, english will be used.
+
+# English
+en:
+  commands:
+    reload: "&aPlugin GameChat reloaded!"
+    help: |-
+      &aGameChat commands:
+      &e/%command% help &7- &bShows available commands!
+      &e/%command% reload &7- &bReloads the plugin!
+      &e/%command% ignore <player> &7- &bIgnores a player from the chat!
+      &e/%command% global &7- &bToggles the global chat!
+      &e/%command% private &7- &bToggles the private chat!
+      &e/%command% sounds &7- &bToggles the private chat sounds!
+    ignore:
+      true: "&aYou are ignoring &7%player_name%&a!"
+      false: "&cYou are no longer ignoring &7%player_name%&c!"
+    global:
+      true: "&aYou activated the global chat!"
+      false: "&cYou deactivated the global chat!"
+    private:
+      true: "&aYou activated the private chat!"
+      false: "&cYou deactivated the private chat!"
+    sounds:
+      true: "&aYou activated the private chat sounds!"
+      false: "&cYou deactivated the private chat sounds!"
+    error:
+      unknown: "&cUnknown command. Use /%command% to see available commands!"
+      permission: "&cYou dont have permission to use this command!"
+      console: "&cThis command cant be executed from the console!"
+    usage:
+      message: "&c/%command% <player> <message>"
+      reply: "&c/%command% <message>"
+      ignore: "&c/%command% ignore <player>"
+# Spanish
+es:
+  commands:
+    reload: "&aPlugin GameChat recargado!"
+    help: |-
+      &aComandos de GameChat:
+      &e/%command% help &7- &bMuestra los comandos disponibles!
+      &e/%command% reload &7- &bRecarga el plugin!
+      &e/%command% ignore <player> &7- &bIgnora un jugador del chat!
+      &e/%command% global &7- &bAlterna el chat global!
+      &e/%command% private &7- &bAlterna el chat privado!
+      &e/%command% sounds &7- &bAlterna los sonidos de chat!
+    ignore:
+      true: "&aEstas ignorando a &7%player_name%&a!"
+      false: "&cYa no estas ignorando a &7%player_name%&c!"
+    global:
+      true: "&aActivaste el chat global!"
+      false: "&cDesactivaste el chat global!"
+    private:
+      true: "&aActivaste el chat privado!"
+      false: "&cDesactivaste el chat privado!"
+    sounds:
+      true: "&aActivaste los sonidos de chat!"
+      false: "&cDesactivaste los sonidos de chat!"
+    error:
+      unknown: "&cComando desconocido. Usa /%command% para ver los comandos disponibles!"
+      permission: "&cPermisos insuficientes."
+      console: "&cEste comando no puede ser usado desde la consola!"
+    usage:
+      message: "&c/%command% <jugador> <mensaje>"
+      reply: "&c/%command% <mensaje>"
+      ignore: "&c/%command% ignore <jugador>"

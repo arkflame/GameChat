@@ -1,0 +1,15 @@
+name: GameChat
+version: 0.0.1
+author: 2LS
+main: twolovers.gamechat.GameChat
+commands:
+  chat:
+    usage: /chat
+  message:
+    usage: /message
+    aliases: [msg, m, pm, tell]
+  reply:
+    usage: /reply
+    aliases: [r]
+  togglepm:
+    usage: /togglepm
