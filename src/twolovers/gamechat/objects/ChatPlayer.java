@@ -90,8 +90,11 @@ public class ChatPlayer {
 				String format = privateModule.getMessage();
 				String message = "";
 
+				if (!args[0].equals(chatPlayer1.getName()))
+					message = message.concat(args[0] + " ");
+
 				for (int i = 1; i < args.length; i++) {
-					if (i != 1)
+					if (i > 1)
 						message = message.concat(" " + args[i]);
 					else
 						message = message.concat(args[i]);
