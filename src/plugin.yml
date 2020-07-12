@@ -1,15 +1,14 @@
 name: GameChat
-version: 0.0.2
+version: 0.0.3
 author: 2LS
-main: twolovers.gamechat.GameChat
+main: dev._2lstudios.gamechat.GameChat
+api-version: '1.13'
 commands:
   chat:
     usage: /chat
-  message:
-    usage: /message
-    aliases: [msg, m, pm, tell]
+  msg:
+    usage: /msg
+    aliases: [m, pm, tell]
   reply:
     usage: /reply
     aliases: [r]
-  togglepm:
-    usage: /togglepm
