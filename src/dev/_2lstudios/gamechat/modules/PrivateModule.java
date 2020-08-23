@@ -1,12 +1,14 @@
 package dev._2lstudios.gamechat.modules;
 
+import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import dev._2lstudios.gamechat.interfaces.BukkitModule;
 
 public class PrivateModule implements BukkitModule {
-	private boolean enabled, sound;
+	private Sound sound;
 	private String sender, receiver, message;
+	private boolean enabled;
 
 	public PrivateModule(final FileConfiguration configYml) {
 		reload(configYml);
@@ -17,7 +19,12 @@ public class PrivateModule implements BukkitModule {
 		this.sender = configYml.getString("private.format.sender");
 		this.receiver = configYml.getString("private.format.receiver");
 		this.message = configYml.getString("private.format.message");
-		this.sound = configYml.getBoolean("private.sound");
+
+		try {
+			this.sound = Sound.valueOf(configYml.getString("private.sound"));
+		} catch (final Exception ex) {
+			this.sound = null;
+		}
 	}
 
 	public boolean isEnabled() {
@@ -36,7 +43,7 @@ public class PrivateModule implements BukkitModule {
 		return message;
 	}
 
-	public boolean getSound() {
+	public Sound getSound() {
 		return sound;
 	}
 }

@@ -18,19 +18,19 @@ public class ModuleManager {
 	private MessagesModule messagesModule;
 
 	public ModuleManager(final FileConfiguration configYml, final FileConfiguration messagesYml) {
-		this.chatPlayerModule = new ChatPlayerModule();
-		this.globalModule = new GlobalModule(configYml);
-		this.privateModule = new PrivateModule(configYml);
-		this.reformatterModule = new ReformatterModule(configYml);
-		this.placeholdersModule = new PlaceholdersModule();
-		this.messagesModule = new MessagesModule(messagesYml);
+		chatPlayerModule = new ChatPlayerModule();
+		globalModule = new GlobalModule(configYml);
+		privateModule = new PrivateModule(configYml);
+		reformatterModule = new ReformatterModule(configYml);
+		placeholdersModule = new PlaceholdersModule();
+		messagesModule = new MessagesModule(messagesYml);
 	}
 
 	public void reload(final FileConfiguration configYml, final FileConfiguration messagesYml) {
-		this.globalModule.reload(configYml);
-		this.privateModule.reload(configYml);
-		this.reformatterModule.reload(configYml);
-		this.messagesModule.reload(messagesYml);
+		globalModule.reload(configYml);
+		privateModule.reload(configYml);
+		reformatterModule.reload(configYml);
+		messagesModule.reload(messagesYml);
 	}
 
 	public ChatPlayerModule getChatPlayerModule() {

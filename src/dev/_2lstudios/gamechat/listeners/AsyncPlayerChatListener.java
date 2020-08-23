@@ -50,16 +50,17 @@ public class AsyncPlayerChatListener implements Listener {
 					message = ChatColor.translateAlternateColorCodes('&', message);
 				}
 
-				if (!displayName.equals(playerName))
+				if (!displayName.equals(playerName)) {
 					format = placeholdersModule
 							.replacePlaceholders(player,
 									format.replace("%player_displayname%",
 											globalModule.getDisplaynameIcon() + displayName))
 							.replace("%message%", message).replace("%", "%%");
-				else
+				} else {
 					format = placeholdersModule
 							.replacePlaceholders(player, format.replace("%player_displayname%", displayName))
 							.replace("%message%", message).replace("%", "%%");
+				}
 
 				event.setFormat(format);
 
@@ -68,17 +69,14 @@ public class AsyncPlayerChatListener implements Listener {
 
 					if (sender instanceof Player) {
 						if (chatPlayer.isGlobalChatEnabled() && !chatPlayer.getIgnoredPlayers().contains(playerName)) {
-							final Player player1 = (Player) sender;
 							final String player1Name = sender.getName();
 
-							if (chatPlayer.isSound() && message.contains(player1Name)) {
-								if (VersionUtil.isOneDotNine())
-									player1.playSound(player1.getLocation(), Sound.valueOf("BLOCK_NOTE_PLING"), 1, 2);
-								else
-									player1.playSound(player1.getLocation(), Sound.valueOf("NOTE_PLING"), 1, 2);
+							if (message.contains(player1Name)) {
+								chatPlayer.playSound();
 							}
-						} else
+						} else {
 							recipents.remove(sender);
+						}
 					}
 				}
 			}

@@ -1,16 +1,45 @@
 package dev._2lstudios.gamechat.utils;
 
-import org.bukkit.Bukkit;
+import org.bukkit.Server;
+import org.bukkit.entity.Player;
 
 public class VersionUtil {
-	private static boolean oneDotNine;
+	private static boolean isOneDotNine, oneDotSeven;
 
-	public static void init() {
-		oneDotNine = !Bukkit.getServer().getVersion().contains("1.8")
-				&& !Bukkit.getServer().getVersion().contains("1.7");
+	public static void initialize(final Server server) {
+		final String version = server.getVersion();
+
+		isOneDotNine = version.contains("1.9");
+		oneDotSeven = version.contains("1.7");
+	}
+
+	public static String getLocale(final Player player) {
+		String locale;
+
+		try {
+			player.getClass().getMethod("getLocale");
+			locale = player.getLocale();
+		} catch (final NoSuchMethodException exception) {
+			try {
+				player.spigot().getClass().getMethod("getLocale");
+				locale = player.spigot().getLocale();
+			} catch (final Exception exception1) {
+				locale = "en";
+			}
+		}
+
+		if (locale != null && locale.length() > 1) {
+			return locale.substring(0, 2);
+		} else {
+			return "en";
+		}
 	}
 
 	public static boolean isOneDotNine() {
-		return oneDotNine;
+		return isOneDotNine;
+	}
+
+	public static boolean isOneDotSeven() {
+		return oneDotSeven;
 	}
 }

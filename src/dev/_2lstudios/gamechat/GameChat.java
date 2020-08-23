@@ -14,6 +14,7 @@ import dev._2lstudios.gamechat.listeners.AsyncPlayerChatListener;
 import dev._2lstudios.gamechat.listeners.PlayerJoinListener;
 import dev._2lstudios.gamechat.listeners.PlayerQuitListener;
 import dev._2lstudios.gamechat.managers.ModuleManager;
+import dev._2lstudios.gamechat.modules.ChatPlayerModule;
 import dev._2lstudios.gamechat.utils.ConfigurationUtil;
 import dev._2lstudios.gamechat.utils.VersionUtil;
 
@@ -21,7 +22,9 @@ public class GameChat extends JavaPlugin {
 	private ModuleManager moduleManager;
 
 	public void onEnable() {
-		VersionUtil.init();
+		final Server server = Bukkit.getServer();
+
+		VersionUtil.initialize(server);
 
 		final ConfigurationUtil configurationUtil = new ConfigurationUtil(this);
 
@@ -30,10 +33,11 @@ public class GameChat extends JavaPlugin {
 
 		final FileConfiguration configYml = configurationUtil.getYamlConfiguration("%datafolder%/config.yml");
 		final FileConfiguration messagesYml = configurationUtil.getYamlConfiguration("%datafolder%/messages.yml");
-		final Server server = Bukkit.getServer();
 		final PluginManager pluginManager = server.getPluginManager();
 
 		moduleManager = new ModuleManager(configYml, messagesYml);
+
+		final ChatPlayerModule chatPlayerModule = moduleManager.getChatPlayerModule();
 
 		pluginManager.registerEvents(new AsyncPlayerChatListener(moduleManager), this);
 		pluginManager.registerEvents(new PlayerJoinListener(moduleManager), this);
@@ -42,14 +46,10 @@ public class GameChat extends JavaPlugin {
 		server.getPluginCommand("chat").setExecutor(new ChatCommand(this, moduleManager));
 		server.getPluginCommand("msg").setExecutor(new MessageCommand(moduleManager));
 		server.getPluginCommand("reply").setExecutor(new ReplyCommand(moduleManager));
-
-		for (final Player player : Bukkit.getOnlinePlayers())
-			moduleManager.getChatPlayerModule().createChatPlayer(moduleManager, player);
-
-		moduleManager.getChatPlayerModule().createChatPlayer(moduleManager, server.getConsoleSender());
 	}
 
 	public void reload() {
+		final Server server = getServer();
 		final ConfigurationUtil configurationUtil = new ConfigurationUtil(this);
 
 		configurationUtil.createYamlConfiguration("%datafolder%/config.yml");
@@ -59,5 +59,13 @@ public class GameChat extends JavaPlugin {
 		final FileConfiguration messagesYml = configurationUtil.getYamlConfiguration("%datafolder%/messages.yml");
 
 		moduleManager.reload(configYml, messagesYml);
+
+		final ChatPlayerModule chatPlayerModule = moduleManager.getChatPlayerModule();
+
+		for (final Player player : server.getOnlinePlayers()) {
+			chatPlayerModule.createChatPlayer(moduleManager, player);
+		}
+
+		chatPlayerModule.createChatPlayer(moduleManager, server.getConsoleSender());
 	}
 }

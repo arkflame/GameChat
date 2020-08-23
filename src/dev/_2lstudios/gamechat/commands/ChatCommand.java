@@ -1,5 +1,6 @@
 package dev._2lstudios.gamechat.commands;
 
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -11,6 +12,7 @@ import dev._2lstudios.gamechat.managers.ModuleManager;
 import dev._2lstudios.gamechat.modules.ChatPlayerModule;
 import dev._2lstudios.gamechat.modules.MessagesModule;
 import dev._2lstudios.gamechat.objects.ChatPlayer;
+import dev._2lstudios.gamechat.utils.VersionUtil;
 
 public class ChatCommand implements CommandExecutor {
 	private final GameChat gameChat;
@@ -28,7 +30,7 @@ public class ChatCommand implements CommandExecutor {
 		if (sender instanceof Player) {
 			final int length = args.length;
 			final Player player = (Player) sender;
-			final Messages messages = messagesModule.getMessages(player.spigot().getLocale());
+			final Messages messages = messagesModule.getMessages(VersionUtil.getLocale(player));
 
 			if (length > 0) {
 				final String args0 = args[0];
@@ -74,13 +76,15 @@ public class ChatCommand implements CommandExecutor {
 						sender.sendMessage(messages.getPrivateFalse());
 				} else if (args0.equals("sounds")) {
 					final ChatPlayer chatPlayer = chatPlayerModule.getChatPlayer(sender.getName());
+					final Sound sound = chatPlayer.getSound();
 
-					chatPlayer.setSound(!chatPlayer.isSound());
+					chatPlayer.setSound(sound == null);
 
-					if (chatPlayer.isSound())
+					if (sound == null) {
 						sender.sendMessage(messages.getSoundsTrue());
-					else
+					} else {
 						sender.sendMessage(messages.getSoundsFalse());
+					}
 				} else
 					sender.sendMessage(messages.getHelp().replace("%command%", label));
 			} else

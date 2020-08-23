@@ -20,8 +20,9 @@ public class ChatPlayer {
 	private final ReformatterModule reformatterModule;
 	private final Collection<String> ignoredPlayers = new HashSet<>();
 	private final CommandSender sender;
+	private Sound sound;
 	private String lastRecipentName = "";
-	private boolean sound, messages = true, chat = true;
+	private boolean messages = true, chat = true;
 
 	public ChatPlayer(final ModuleManager moduleManager, final CommandSender sender) {
 		this.privateModule = moduleManager.getPrivateModule();
@@ -67,12 +68,16 @@ public class ChatPlayer {
 		return sender;
 	}
 
-	public boolean isSound() {
+	public Sound getSound() {
 		return sound;
 	}
 
 	public void setSound(boolean b) {
-		sound = b;
+		if (b) {
+			sound = privateModule.getSound();
+		} else {
+			sound = null;
+		}
 	}
 
 	public void sendMessage(ChatPlayer chatPlayer1, String[] args) {
@@ -108,15 +113,7 @@ public class ChatPlayer {
 
 				setLastRecipent(chatPlayer1.getSender().getName());
 				chatPlayer1.setLastRecipent(senderName);
-
-				if (chatPlayer1.isSound() && receiver instanceof Player) {
-					final Player player = (Player) receiver;
-
-					if (VersionUtil.isOneDotNine())
-						player.playSound(player.getLocation(), Sound.valueOf("BLOCK_NOTE_PLING"), 1, 2);
-					else
-						player.playSound(player.getLocation(), Sound.valueOf("NOTE_PLING"), 1, 2);
-				}
+				chatPlayer1.playSound();
 			} else
 				sender.sendMessage(ChatColor.RED + "El jugador te ignora o tiene los mensajes desactivados!");
 		} else
@@ -125,5 +122,13 @@ public class ChatPlayer {
 
 	private void setLastRecipent(final String name) {
 		this.lastRecipentName = name;
+	}
+
+	public void playSound() {
+		if (sound != null && sender instanceof Player) {
+			final Player player = (Player) sender;
+
+			player.playSound(player.getLocation(), sound, 1, 2);
+		}
 	}
 }

@@ -36,7 +36,8 @@ private:
   enabled: true
 
   # Plays a sound when a player receives a private message.
-  sound: true
+  # Set to "" to disable.
+  sound: "NOTE_PLING"
 
   # How should the private messages look?
   # Supports PlaceholderAPI

@@ -1,5 +1,5 @@
 name: GameChat
-version: 0.0.3
+version: 0.0.5
 author: 2LS
 main: dev._2lstudios.gamechat.GameChat
 api-version: '1.13'

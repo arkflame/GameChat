@@ -11,6 +11,7 @@ import dev._2lstudios.gamechat.modules.ChatPlayerModule;
 import dev._2lstudios.gamechat.modules.MessagesModule;
 import dev._2lstudios.gamechat.modules.PrivateModule;
 import dev._2lstudios.gamechat.objects.ChatPlayer;
+import dev._2lstudios.gamechat.utils.VersionUtil;
 
 public class ReplyCommand implements CommandExecutor {
 	private final PrivateModule privateModule;
@@ -28,7 +29,7 @@ public class ReplyCommand implements CommandExecutor {
 		final Messages messages;
 
 		if (sender instanceof Player)
-			messages = messagesModule.getMessages(((Player) sender).spigot().getLocale());
+			messages = messagesModule.getMessages(VersionUtil.getLocale((Player) sender));
 		else
 			messages = messagesModule.getMessages("en");
 
