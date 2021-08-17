@@ -3,7 +3,6 @@ package dev._2lstudios.gamechat.listeners;
 import java.util.Collection;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,7 +16,6 @@ import dev._2lstudios.gamechat.modules.GlobalModule;
 import dev._2lstudios.gamechat.modules.PlaceholdersModule;
 import dev._2lstudios.gamechat.modules.ReformatterModule;
 import dev._2lstudios.gamechat.objects.ChatPlayer;
-import dev._2lstudios.gamechat.utils.VersionUtil;
 
 public class AsyncPlayerChatListener implements Listener {
 	private final GlobalModule globalModule;

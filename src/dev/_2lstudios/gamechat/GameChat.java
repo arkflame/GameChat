@@ -37,8 +37,6 @@ public class GameChat extends JavaPlugin {
 
 		moduleManager = new ModuleManager(configYml, messagesYml);
 
-		final ChatPlayerModule chatPlayerModule = moduleManager.getChatPlayerModule();
-
 		pluginManager.registerEvents(new AsyncPlayerChatListener(moduleManager), this);
 		pluginManager.registerEvents(new PlayerJoinListener(moduleManager), this);
 		pluginManager.registerEvents(new PlayerQuitListener(moduleManager), this);
